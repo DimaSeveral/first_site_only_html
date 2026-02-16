@@ -3,148 +3,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Зоомагазин - товары для животных</title>
+    <title>Зоомагазин — товары для животных</title>
     <meta name="description" content="Зоомагазин товаров для домашних животных">
     <meta name="keywords" content="зоомагазин, корм для животных, товары для питомцев">
-</head>
-<body bgcolor="#f0f0f0" text="#000000" link="#0000ff" vlink="#800080" alink="#ff0000">
 
-    <center>
-        <h1>Зоомагазин "Друзья животных"</h1>
-        <font size="4" face="Arial"><b>Всё для ваших питомцев!</b></font>
-    </center>
-    
-    <hr size="3" color="green" width="80%">
-    
+    <!-- 
+        ✅ УСЛОВИЕ 1: СВЯЗЫВАНИЕ ВНЕШНЕГО СТИЛЕВОГО ФАЙЛА 
+        (style.css подключён как основной)
+    -->
+    <link rel="stylesheet" href="style.css" id="theme-stylesheet">
+
+    <!-- Иконки для кнопки "наверх" -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- 
+        ✅ УСЛОВИЕ 7: ВНЕДРЕНИЕ СТИЛЕЙ (внутри <style>)
+        Добавим уникальный стиль прямо в head
+    -->
+    <style>
+        /* ✅ УСЛОВИЕ 6: СЕЛЕКТОР ПО ЭЛЕМЕНТУ */
+        blockquote {
+            font-style: italic;
+            border-left: 4px solid #27ae60;
+            padding-left: 15px;
+            color: #2c3e50;
+            margin: 20px 0;
+        }
+
+        /* ✅ УСЛОВИЕ 6: КОМБИНИРОВАННЫЙ СЕЛЕКТОР */
+        .section h3 {
+            color: #e74c3c;
+            font-family: 'Georgia', serif;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 
+    ✅ УСЛОВИЕ 7: ВСТРАИВАНИЕ СТИЛЕЙ (инлайн-стиль)
+    Применим напрямую к одному элементу
+-->
+<header class="header" style="background-color: #f8f9fa; padding: 20px 0; border-bottom: 2px solid #27ae60;">
+    <h1>Зоомагазин "Друзья животных"</h1>
+    <p class="tagline"><strong>Всё для ваших питомцев!</strong></p>
+</header>
+
+<div class="special-offer">
+    Специальное предложение: скидка 20% на первый заказ!
+</div>
+
+<!-- 
+    ✅ УСЛОВИЕ 6: СЕЛЕКТОР ПО ИДЕНТИФИКАТОРУ (ID)
+    В style.css есть правило для #demo-id
+-->
+<div id="demo-id" class="demo-id">
+    Демонстрация ID-селектора
+</div>
+
+<nav class="toc">
     <h2>Содержание:</h2>
+    <!-- 
+        ✅ УСЛОВИЕ 5: НЕНУМЕРОВАННЫЙ СПИСОК + УСЛОВИЕ 6: СЕЛЕКТОР ПО КЛАССУ (.toc ul)
+    -->
     <ul>
         <li><a href="#about">О магазине</a></li>
         <li><a href="#products">Товары</a></li>
         <li><a href="#animals">Для кого</a></li>
         <li><a href="#links">Ссылки</a></li>
     </ul>
-    
-    <hr>
-    
-    <a name="about"></a>
+</nav>
+
+<hr>
+
+<section id="about" class="section">
     <h2>О нашем магазине</h2>
-    
-    <p align="justify">
-        <font face="Times New Roman" size="3">
+    <!-- 
+        ✅ УСЛОВИЕ 2, 3, 4: изменение текста, фона, шрифта через класс .welcome
+        (стили в style.css)
+    -->
+    <p class="welcome">
         Добро пожаловать в наш зоомагазин! Мы продаем товары для домашних животных уже много лет. 
         У нас есть все необходимое для ваших питомцев.
-        </font>
     </p>
-    
-    <p>
-        <font face="Courier New" size="4">
-        <b>Наши преимущества:</b> низкие цены, большой выбор, хорошее качество.
-        </font>
+    <p class="advantages">
+        <strong>Наши преимущества:</strong> низкие цены, большой выбор, хорошее качество.
     </p>
-    
-    <center>
+    <figure class="center">
         <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" 
-             alt="Собака" width="300" height="200" border="2">
-        <br>
-        <small><i>Наш магазин</i></small>
-    </center>
-    
-    <hr noshade>
-    
-    <a name="products"></a>
+             alt="Собака" width="300" height="200">
+        <figcaption>Наш магазин</figcaption>
+    </figure>
+
+    <!-- 
+        ✅ УСЛОВИЕ 2, 3, 4: дополнительный пример — цитата с уникальным оформлением
+    -->
+    <blockquote>
+        «Лучший друг человека заслуживает лучшего питания!»
+    </blockquote>
+</section>
+
+<hr>
+
+<section id="products" class="section">
     <h2>Наши товары</h2>
-    
-    <table border="1" cellpadding="5" cellspacing="0" width="100%" bgcolor="#e0ffe0">
-        <tr bgcolor="#cccccc">
-            <th width="30%">Категория</th>
-            <th>Описание</th>
-        </tr>
-        <tr>
-            <td valign="top"><b>Корма</b></td>
-            <td>Сухие и влажные корма для всех животных</td>
-        </tr>
-        <tr>
-            <td valign="top"><b>Игрушки</b></td>
-            <td>Мячики, пищалки, интерактивные игрушки</td>
-        </tr>
-        <tr>
-            <td valign="top"><b>Аксессуары</b></td>
-            <td>Ошейники, поводки, миски, лежанки</td>
-        </tr>
+    <table>
+        <thead>
+            <tr>
+                <th>Категория</th>
+                <th>Описание</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Корма</strong></td><td>Сухие и влажные корма для всех животных</td></tr>
+            <tr><td><strong>Игрушки</strong></td><td>Мячики, пищалки, интерактивные игрушки</td></tr>
+            <tr><td><strong>Аксессуары</strong></td><td>Ошейники, поводки, миски, лежанки</td></tr>
+        </tbody>
     </table>
-    
-    <br>
-    
+
     <h3>Популярные товары:</h3>
-    <ul type="square">
+    <!-- 
+        ✅ УСЛОВИЕ 5: НЕНУМЕРОВАННЫЙ СПИСОК с классом .popular-products
+    -->
+    <ul class="popular-products">
         <li>Корм для кошек "Whiskas"</li>
         <li>Ошейник для собак</li>
         <li>Игрушка-мышка</li>
         <li>Аквариум 50 литров</li>
     </ul>
-    
-    <hr width="50%" align="left">
-    
-    <a name="animals"></a>
+</section>
+
+<hr>
+
+<section id="animals" class="section">
     <h2>Для каких животных</h2>
-        
-    <br>
-    
     <dl>
-        <dt><font color="green"><b>Собаки</b></font></dt>
+        <dt>Собаки</dt>
         <dd>Корма, игрушки, аксессуары для собак всех пород</dd>
-        
-        <dt><font color="brown"><b>Кошки</b></font></dt>
+        <dt>Кошки</dt>
         <dd>Все для кошек: от корма до когтеточек</dd>
-        
-        <dt><font color="gray"><b>Грызуны</b></font></dt>
+        <dt>Грызуны</dt>
         <dd>Клетки, корм, опилки для хомяков, кроликов, морских свинок</dd>
     </dl>
-    
-    <center>
-        <img src="https://images.unsplash.com/photo-1596273315327-5f059f4fea97?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" 
-             alt="Кошка" width="250" height="180" hspace="20">
-        <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" 
-             alt="Собака" width="250" height="180" hspace="20">
-    </center>
-    
-    <hr size="5">
-    
-    <a name="links"></a>
-    <h2>Полезные ссылки</h2>
-    
-    <ol>
-        <li><a href="https://zoozavr.ru/?ysclid=mjo6q8qn0517637417&utm_source=ya&utm_medium=cpc&utm_campaign=Zoozavr_dec_2025&utm_content=dtsmr!zoozvr!Zoozavr_dec_2025!ya!yadir!text!text!rf!unfd_prf_cmp!txt__87r62&utm_term=__87r62&etext=2202.bNH0PA18_cLA_fUuJH8CVXpoG4evdNz3cg1QOn3-uoVmamx2dXNoa2d6Z2d5ZWd5.18112217259b510ba2879f602be8f66ac7eb1b79&yclid=13828645362927403007&ybaip=1" target="_blank">PetMD - информация о здоровье животных</a></li>
-        <li><a href="https://www.buddydinner.ru/?etext=2202.bNH0PA18_cLA_fUuJH8CVXpoG4evdNz3cg1QOn3-uoVmamx2dXNoa2d6Z2d5ZWd5.18112217259b510ba2879f602be8f66ac7eb1b79&yclid=3371872622413611007&ybaip=1" target="_blank">AKC - кинологический клуб</a></li>
-        
-    </ol>
-    
-    <h3>Наши контакты:</h3>
-    <address>
-        <pre>
-    Адрес: г. Красноярск, ул. Батоническая, 15
-    Телефон: 89222017562
-    Email: <a href="mailto:info@zoo.ru">info@zoo.ru</a>
-    График: пн-пт 9:00-21:00, сб-вс 10:00-20:00
-        </pre>
-    </address>
-    
-    <br>
-    
-    <center>
-        <a href="#top">Наверх ↑</a>
-    </center>
-    
-    <hr>
-    
-    <footer>
-        <center>
-            <font size="2" color="gray">
-                © 2026 Зоомагазин "Друзья животных". <br>
-                
-            </font>
-        </center>
-    </footer>
 
+    <div class="animal-images center">
+    
+        <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" 
+             alt="Собака" width="250" height="180">
+    </div>
+</section>
+
+<hr>
+
+<section id="links" class="section">
+    <h2>Полезные ссылки</h2>
+    <!-- 
+        ✅ УСЛОВИЕ 5: НУМЕРОВАННЫЙ СПИСОК (ol) + УСЛОВИЕ 6: селектор ol в style.css
+    -->
+    <ol>
+        <li><a href="https://zoozavr.ru/" target="_blank" rel="noopener">Zoozavr — зоомагазин</a></li>
+        <li><a href="https://www.buddydinner.ru/" target="_blank" rel="noopener">Buddy Dinner — рационы для питомцев</a></li>
+    </ol>
+
+    <h3>Наши контакты:</h3>
+    <address class="contacts">
+        Адрес: г. Красноярск, ул. Батоническая, 15<br>
+        Телефон: <a href="tel:+79222017562">8 (922) 201-75-62</a><br>
+        Email: <a href="mailto:info@zoo.ru">info@zoo.ru</a><br>
+        График: пн-пт 9:00–21:00, сб-вс 10:00–20:00
+    </address>
+</section>
+
+<a href="#" class="back-to-top" title="Наверх">
+    <i class="fas fa-arrow-up"></i>
+</a>
+
+<footer class="footer">
+    <p align = 'center'>© 2026 Зоомагазин "Друзья животных".</p>
+</footer>
+
+<!-- 
+    ✅ УСЛОВИЕ 8: ПЕРЕКЛЮЧЕНИЕ МЕЖДУ ДВУМЯ СТИЛЕВЫМИ ФАЙЛАМИ
+    Основной: style.css
+    Альтернативный: style-alternative.css
+-->
+<div class="theme-switcher">
+    <strong>Выберите тему:</strong><br><br>
+    <button class="theme-btn light" onclick="setTheme('light')">☀️ Светлая</button>
+    <button class="theme-btn dark" onclick="setTheme('dark')">🌙 Темная</button>
+</div>
+
+<script>
+    function setTheme(theme) {
+        const stylesheet = document.getElementById('theme-stylesheet');
+        if (theme === 'dark') {
+            stylesheet.href = 'style-alternative.css'; 
+        } else {
+            stylesheet.href = 'style.css'; 
+        }
+        localStorage.setItem('site-theme', theme);
+    }
+
+    window.onload = () => {
+        const saved = localStorage.getItem('site-theme');
+        if (saved === 'dark') {
+            document.getElementById('theme-stylesheet').href = 'style-alternative.css';
+        }
+    };
+
+   // Плавная прокрутка наверх
+document.querySelector('.back-to-top').addEventListener('click', function(e) {
+    e.preventDefault();
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+// Показ/скрытие кнопки при скролле
+window.addEventListener('scroll', function() {
+    const button = document.querySelector('.back-to-top');
+    if (window.scrollY > 300) {
+        button.style.display = 'flex'; // ← важно: не 'block', а 'flex'!
+    } else {
+        button.style.display = 'none';
+    }
+});
+</script>
+    <a href="#" class="back-to-top" title="Наверх">
+    <i class="fas fa-arrow-up"></i>
+</a>
 </body>
 </html>
