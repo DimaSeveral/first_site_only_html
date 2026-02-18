@@ -1,0 +1,441 @@
+/* ===== ЦВЕТОВЫЕ ПЕРЕМЕННЫЕ — СВЕТЛАЯ ТЕМА ===== */
+:root {
+    --bg: #ffffff;
+    --text: #000000;
+    --text-secondary: #34495e;
+    --accent: #27ae60;
+    --accent-light: #2c3e50;
+    --card-bg: #ffffff;
+    --card-border: #27ae60;
+    --link-color: #2980b9;
+    --link-hover: #e74c3c;
+    --table-header: #27ae60;
+    --table-even: #f2f2f2;
+    --hr-gradient: linear-gradient(to right, #27ae60, #f1c40f, #e74c3c);
+}
+
+/* ===== ОБЩИЕ СТИЛИ (ОДИНАКОВЫЕ ДЛЯ ОБЕИХ ТЕМ) ===== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 20px;
+    position: relative; /* Для контекста позиционирования */
+    min-height: 100vh;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative; /* УСЛОВИЕ 3: относительное позиционирование */
+    z-index: 10;
+}
+
+.header h1 {
+    color: var(--accent-light);
+    font-size: 2.5em;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.tagline {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.special-offer {
+    background-color: #fff9e6;
+    padding: 10px;
+    text-align: center;
+    border: 2px solid #f1c40f;
+    font-weight: bold;
+    margin: 20px 0;
+    border-radius: 5px;
+    color: #d35400;
+    position: relative; /* УСЛОВИЕ 3: относительное позиционирование */
+    top: 0;
+    left: 0;
+}
+
+.demo-id {
+    color: purple;
+    font-size: 20px;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 15px 0;
+}
+
+hr {
+    border: none;
+    height: 3px;
+    background: var(--hr-gradient);
+    margin: 30px 0;
+    clear: both; /* УСЛОВИЕ 5: clear для разделителей */
+}
+
+.section {
+    margin-bottom: 40px;
+    clear: both; /* УСЛОВИЕ 5: clear для секций */
+}
+
+.section h2 {
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 5px;
+    margin-top: 0;
+}
+
+.welcome {
+    font-family: 'Times New Roman', serif;
+    font-size: 18px;
+    color: var(--text-secondary);
+    background-color: var(--card-bg);
+    padding: 15px;
+    border-radius: 5px;
+    font-style: italic;
+    display: block;
+    border-left: 4px solid var(--accent);
+}
+
+.advantages {
+    font-family: 'Courier New', monospace;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+.center {
+    text-align: center;
+}
+
+figure img {
+    border: 3px solid var(--card-border);
+    border-radius: 10px;
+    max-width: 100%;
+    height: auto;
+    transition: transform 0.3s;
+}
+
+figure img:hover {
+    transform: scale(1.05);
+}
+
+figcaption {
+    font-style: italic;
+    margin-top: 8px;
+    color: var(--text-secondary);
+}
+
+/* ===== УСЛОВИЕ 4: КОЛОНКИ С ПОМОЩЬЮ FLOAT ===== */
+/* Создаем 3 колонки для товаров */
+.product-columns {
+    margin: 30px 0;
+    overflow: auto; /* Для схлопывания float-контейнера */
+    border: 2px solid var(--accent);
+    padding: 15px;
+    border-radius: 10px;
+    background-color: rgba(39, 174, 96, 0.05);
+}
+
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.column h4 {
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.column ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.column li {
+    padding: 8px;
+    margin: 5px 0;
+    background-color: var(--card-bg);
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.column li:hover {
+    transform: translateX(5px);
+    background-color: var(--accent);
+    color: white;
+}
+
+/* ===== УСЛОВИЕ 5: CLEARFIX для контейнера с float ===== */
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* УСЛОВИЕ 5: clear для элементов после колонок */
+.clear-both {
+    clear: both;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px dashed var(--accent);
+}
+
+/* Таблица */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background: var(--card-bg);
+    margin: 15px 0;
+}
+
+table th,
+table td {
+    padding: 12px;
+    text-align: left;
+}
+
+table th {
+    background-color: var(--table-header);
+    color: white;
+    font-size: 1.1em;
+}
+
+table tr:nth-child(even) {
+    background-color: var(--table-even);
+}
+
+/* Списки */
+.toc ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.toc li {
+    background-color: #3498db;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.toc a {
+    color: white !important;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.popular-products { 
+    list-style-type: circle;
+    background-color: #f9f9f9;
+    padding: 20px 40px;
+    border: 2px dashed #3498db;
+    border-radius: 8px;
+    margin: 15px 0;
+    clear: both; /* УСЛОВИЕ 5: clear для списка */
+}
+
+ol {
+    list-style-type: upper-roman;
+    background-color: #e74c3c;
+    color: white;
+    padding: 20px 40px;
+    border-radius: 10px;
+    margin: 15px 0;
+}
+
+ol li {
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+ol a {
+    color: white !important;
+    text-decoration: none;
+}
+
+ol a:hover {
+    text-decoration: underline;
+    color: #f1c40f !important;
+}
+
+/* Список определений */
+dl {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border: 3px solid var(--card-border);
+    border-radius: 8px;
+    margin: 15px 0;
+}
+
+dt {
+    font-size: 1.4em;
+    margin-top: 15px;
+    color: var(--accent-light);
+}
+
+dd {
+    margin-left: 20px;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+.button { background-color: rgb(17, 165, 17);
+    border-color: rgb(17, 165, 17);
+    padding: 15px
+}
+/* Контакты */
+.contacts {
+    background-color: var(--card-bg);
+    color: var(--text);
+    padding: 15px;
+    border-radius: 5px;
+    font-style: normal;
+    border: 1px solid var(--card-border);
+    display: inline-block;
+    width: 100%;
+    max-width: 500px;
+}
+
+/* ===== УСЛОВИЕ 3: АБСОЛЮТНОЕ ПОЗИЦИОНИРОВАНИЕ ===== */
+/* Бейдж "НОВИНКА" с абсолютным позиционированием */
+.new-badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: #e74c3c;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 30px;
+    font-size: 10px;
+    font-weight: bold;
+    transform: rotate(5deg);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    z-index: 100;
+}
+
+/* Контейнер для абсолютного позиционирования */
+.position-demo {
+    position: relative;
+    margin: 30px 0;
+    padding: 20px;
+    background-color: var(--card-bg);
+    border: 2px solid var(--accent);
+    border-radius: 10px;
+    min-height: 150px;
+}
+
+.absolute-box {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--accent);
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* Кнопка "наверх" с фиксированным позиционированием */
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: var(--accent);
+    color: white !important;
+    border-radius: 50%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none !important;
+    font-size: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 1000;
+    transition: background 0.3s ease;
+}
+
+.back-to-top:hover {
+    background: var(--accent-light);
+}
+
+/* Переключатель темы — фиксированное позиционирование */
+.theme-switcher {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: var(--card-bg);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 1000;
+    border: 2px solid var(--card-border);
+}
+
+.theme-btn {
+    padding: 8px 16px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.theme-btn.light {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.theme-btn.dark {
+    background-color: #333;
+    color: white;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .toc ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .toc li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .animal-images img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 15px;
+    }
+    
+    /* УСЛОВИЕ 4: Адаптив для колонок */
+    .column {
+        width: 100%;
+        float: none;
+    }
+}
+
+.footer {
+    position: relative; /* Относительное позиционирование */
+    bottom: 0;
+    width: 100%;
+    margin-top: 50px;
+    padding: 20px 0;
+    background-color: var(--accent-light);
+    color: white;
+    text-align: center;
+}
