@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оформление заказа | Зоомагазин</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="main.js"></script> 
+    <script src="object.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Навигация (такая же как на главной) -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-success">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">
+            <i class="bi bi-house-heart-fill me-2"></i>
+            Зоомагазин
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="order.html">Оформить заказ</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Основной контейнер -->
+<main class="container my-5">
+    <div class="row">
+        <div class="col-12 mb-4">
+            <h1 class="text-success">
+                <i class="bi bi-cart-check-fill me-2"></i>
+                Оформление заказа
+            </h1>
+            <p class="lead">Заполните форму ниже, и мы свяжемся с вами для подтверждения заказа</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <!--(левая колонка)-->
+        <div class="col-lg-8 mb-4">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0"><i class="bi bi-pencil-square me-2"></i>Данные покупателя</h5>
+                </div>
+                <div class="card-body">
+
+
+
+<!-- Создать форму, разместить на ней элементы различных типов.
+ -->
+<form id="order-form" novalidate>
+    <h3>Данные покупателя</h3>
+    
+    <!-- Личная информация -->
+    <div class="mb-3">
+        <label for="name" class="form-label">Имя *</label>
+        <input type="text" class="form-control" id="name" name="name" required>
+        <div class="invalid-feedback">Введите имя</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="email" class="form-label">Email *</label>
+        <input type="email" class="form-control" id="email" name="email" required>
+        <div class="invalid-feedback">Введите корректный Email</div>
+    </div>
+
+    <div class="mb-3">
+    <label for="phone" class="form-label">Телефон *</label>
+    <input type="tel" class="form-control" id="phone" name="phone" required placeholder="+7 (___) ___-__-__">
+    <small class="text-muted">Формат: 11 цифр, например: +7 (999) 123-45-67</small>
+    <div class="invalid-feedback">Введите корректный номер телефона (11 цифр)</div>
+</div>
+
+    <!-- Адрес доставки -->
+    <h3>Адрес доставки</h3>
+    <div class="mb-3">
+        <label for="city" class="form-label">Город *</label>
+        <select class="form-select" id="city" name="city" required>
+            <option value="">Выберите город</option>
+            <option value="Красноярск">Красноярск</option>
+            <option value="Москва">Москва</option>
+            <option value="Санкт-Петербург">Санкт-Петербург</option>
+            <option value="Новосибирск">Новосибирск</option>
+        </select>
+        <div class="invalid-feedback">Выберите город</div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label for="street" class="form-label">Улица *</label>
+            <input type="text" class="form-control" id="street" name="street" required>
+            <div class="invalid-feedback">Введите улицу</div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="house" class="form-label">Дом *</label>
+            <input type="text" class="form-control" id="house" name="house" required>
+            <div class="invalid-feedback">Введите номер дома</div>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="apartment" class="form-label">Кв/офис</label>
+        <!-- Зависимость 1: Разблокируется только после заполнения поля "Дом" -->
+        <input type="text" class="form-control" id="apartment" name="apartment" disabled>
+        <small class="text-muted">Заполните поле "Дом", чтобы ввести квартиру</small>
+    </div>
+
+    <div class="mb-3">
+        <label for="delivery-comment" class="form-label">Комментарий к доставке</label>
+        <!-- Зависимость 2: Разблокируется только при выборе "Курьером" -->
+        <textarea class="form-control" id="delivery-comment" name="comment" rows="2" disabled></textarea>
+        <small class="text-muted">Доступно только для доставки курьером</small>
+    </div>
+
+    <!-- Способ доставки -->
+    <h3>Способ доставки</h3>
+    <div class="mb-3">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="delivery" id="delivery-courier" value="courier" required>
+            <label class="form-check-label" for="delivery-courier">Курьером (бесплатно от 3000₽)</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="delivery" id="delivery-pickup" value="pickup">
+            <label class="form-check-label" for="delivery-pickup">Самовывоз</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="delivery" id="delivery-post" value="post">
+            <label class="form-check-label" for="delivery-post">Почта России</label>
+        </div>
+        <div class="invalid-feedback">Выберите способ доставки</div>
+    </div>
+
+    <!-- Согласие -->
+    <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="personal-data" name="personal-data" required>
+        <label class="form-check-label" for="personal-data">Я согласен на обработку персональных данных *</label>
+        <div class="invalid-feedback">Необходимо согласие</div>
+    </div>
+
+    <div class="mb-3 form-check">
+        <!-- Зависимость 3: Доступно только если заполнен Email -->
+        <input type="checkbox" class="form-check-input" id="news-check" name="news" disabled>
+        <label class="form-check-label" for="news-check">Хочу получать новости и скидки на email</label>
+    </div>
+
+    <!-- Кнопка отправки -->
+    <button type="submit" id="order-submit" class="btn btn-secondary w-100" disabled>Оформить заказ</button>
+</form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Корзина и итог (правая колонка) -->
+        <div class="col-lg-4">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0"><i class="bi bi-basket me-2"></i>Ваш заказ</h5>
+                </div>
+                <div class="card-body">
+                    <!-- Товары в корзине -->
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span>Корм для собак (2 кг)</span>
+                        <span class="badge bg-success">1 250 ₽</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span>Игрушка-мышка</span>
+                        <span class="badge bg-success">350 ₽</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span>Ошейник (L)</span>
+                        <span class="badge bg-success">890 ₽</span>
+                    </div>
+                    
+                    <hr>
+                    
+                    <!-- Промокод -->
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Промокод">
+                        <button class="btn btn-success" type="button">Применить</button>
+                    </div>
+                    
+                    <!-- Итоговая сумма -->
+                    <div class="d-flex justify-content-between fw-bold fs-5 mb-3">
+                        <span>Итого:</span>
+                        <span class="text-success">2 490 ₽</span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between text-muted small mb-1">
+                        <span>Товары:</span>
+                        <span>2 490 ₽</span>
+                    </div>
+                    <div class="d-flex justify-content-between text-muted small mb-1">
+                        <span>Доставка:</span>
+                        <span class="text-success">бесплатно</span>
+                    </div>
+                    <div class="d-flex justify-content-between text-muted small mb-3">
+                        <span>Скидка:</span>
+                        <span>0 ₽</span>
+                    </div>
+                    
+                    <hr>
+                    
+                    <!-- Кнопки оформления -->
+                    <button class="btn btn-success w-100 mb-2" onclick="alert('Заказ оформлен! (демонстрация)')">
+                        <i class="bi bi-check-circle me-2"></i>Оформить заказ
+                    </button>
+                    <button class="btn btn-outline-success w-100" onclick="history.back()">
+                        <i class="bi bi-arrow-left me-2"></i>Вернуться к покупкам
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Информационный блок -->
+            <div class="alert alert-success mt-3">
+                <a href="#" class="text-decoration-none" role="button">
+                <i class="bi bi-info-circle-fill me-1"></i>
+                </a>
+                <small>Нажимая "Оформить заказ", вы подтверждаете, что ознакомлены с условиями доставки и возврата.</small>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Футер -->
+<footer class="bg-success text-white py-3 mt-5">
+    <div class="container text-center">
+        <small>© 2026 Зоомагазин "Друзья животных"</small>
+    </div>
+</footer>
+
+    <!-- Переключатель темы -->
+    <div class="position-fixed bottom-0 start-0 m-4" style="z-index: 1000;">
+        <div class="btn-group-vertical shadow">
+            <button class="btn btn-light border" onclick="setTheme('light')" id="lightThemeBtn">
+                <i class="bi bi-sun-fill"></i> Светлая
+            </button>
+            <button class="btn btn-dark border" onclick="setTheme('dark')" id="darkThemeBtn">
+                <i class="bi bi-moon-stars-fill"></i> Темная
+            </button>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <scrip src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="object.js"></script>
+</body>
+</body>
+</html>
+
