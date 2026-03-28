@@ -1,3 +1,122 @@
+/* ========== BANER СОГЛАСИЯ НА COOKIE (ФИКСИРОВАННЫЙ) ========== */
+#cookie-consent-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--bs-card-bg, #fff);
+    border-top: 1px solid var(--bs-card-border-color, rgba(0,0,0,0.125));
+    padding: 1rem 1.5rem;
+    z-index: 9999;
+    box-shadow: 0 -2px 20px rgba(0,0,0,0.15);
+    
+    /* Скрыт по умолчанию, показывается через класс .show */
+    display: none;
+    transform: translateY(100%);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+}
+
+#cookie-consent-banner.show {
+    display: block;
+    transform: translateY(0);
+    opacity: 1;
+}
+
+#cookie-consent-banner .banner-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+#cookie-consent-banner .banner-text {
+    flex: 1;
+    min-width: 250px;
+    font-size: 0.9rem;
+    color: var(--bs-body-color, #212529);
+    line-height: 1.4;
+}
+
+#cookie-consent-banner .banner-text a {
+    color: #0d6efd;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+#cookie-consent-banner .banner-text a:hover {
+    text-decoration: underline;
+}
+
+#cookie-consent-banner .banner-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+#cookie-consent-banner .btn-accept {
+    background: #198754;
+    border-color: #198754;
+    color: white;
+    padding: 0.5rem 1.25rem;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+#cookie-consent-banner .btn-accept:hover {
+    background: #157347;
+    border-color: #146c43;
+}
+
+#cookie-consent-banner .btn-reject {
+    background: #6c757d;
+    border-color: #6c757d;
+    color: white;
+    padding: 0.5rem 1.25rem;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+#cookie-consent-banner .btn-reject:hover {
+    background: #5c636a;
+    border-color: #565e64;
+}
+
+/* Тёмная тема для баннера */
+[data-theme="dark"] #cookie-consent-banner,
+body.dark-theme #cookie-consent-banner {
+    background: var(--bs-card-bg, #16213e);
+    border-top-color: rgba(255,255,255,0.1);
+}
+
+[data-theme="dark"] #cookie-consent-banner .banner-text,
+body.dark-theme #cookie-consent-banner .banner-text {
+    color: var(--bs-body-color, #eaeaea);
+}
+
+/* Опционально: размытие контента до согласия */
+body.cookie-pending main,
+body.cookie-pending .navbar,
+body.cookie-pending footer {
+    filter: blur(1px);
+    pointer-events: none;
+    user-select: none;
+    transition: filter 0.3s ease;
+}
+
+body.cookie-pending #cookie-consent-banner {
+    pointer-events: auto;
+}
+
+body.cookie-consent-given main,
+body.cookie-consent-given .navbar,
+body.cookie-consent-given footer {
+    filter: none;
+    pointer-events: auto;
+    user-select: auto;
+}
 /* === ТЁМНАЯ ТЕМА === */
 :root {
     --bs-body-bg: #ffffff;
@@ -6,6 +125,9 @@
     --bs-card-border-color: rgba(0,0,0,0.125);
     --bs-modal-content-bg: #ffffff;
     --bs-modal-content-color: #212529;
+    --bs-navbar-bg: #f8f9fa;
+    --bs-input-bg: #ffffff;
+    --bs-input-color: #212529;
 }
 
 [data-theme="dark"], body.dark-theme {
@@ -15,106 +137,175 @@
     --bs-card-border-color: rgba(255,255,255,0.1);
     --bs-modal-content-bg: #16213e;
     --bs-modal-content-color: #eaeaea;
+    --bs-navbar-bg: #0f3460;
+    --bs-input-bg: #0f3460;
+    --bs-input-color: #eaeaea;
 }
 
-[data-theme="dark"] body, body.dark-theme {
+body {
     background-color: var(--bs-body-bg);
     color: var(--bs-body-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-[data-theme="dark"] .card, body.dark-theme .card {
+/* Плавный переход темы для всех элементов */
+body, .card, .form-control, .table, .modal-content, 
+.list-group-item, .navbar, .btn, input, select, textarea {
+    transition: background-color 0.3s ease, color 0.3s ease, 
+                border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Карточки */
+.card {
     background-color: var(--bs-card-bg);
     border-color: var(--bs-card-border-color);
 }
 
-[data-theme="dark"] .card-body, body.dark-theme .card-body {
+.card-body {
     color: var(--bs-body-color);
 }
 
-[data-theme="dark"] .card-header, body.dark-theme .card-header {
-    background-color: #0f3460 !important;
-    color: #eaeaea !important;
+.card-header {
+    background-color: var(--bs-navbar-bg) !important;
+    color: var(--bs-body-color) !important;
 }
 
-[data-theme="dark"] .card-footer, body.dark-theme .card-footer {
-    background-color: #0f3460;
-    color: #eaeaea;
+.card-footer {
+    background-color: var(--bs-navbar-bg);
+    color: var(--bs-body-color);
 }
 
-[data-theme="dark"] .table, body.dark-theme .table {
+/* Навигация */
+.navbar {
+    background-color: var(--bs-navbar-bg) !important;
+}
+
+.navbar-brand, .nav-link {
+    color: var(--bs-body-color) !important;
+}
+
+/* Формы */
+.form-control, .form-select {
+    background-color: var(--bs-input-bg);
+    border-color: rgba(255,255,255,0.2);
+    color: var(--bs-input-color);
+}
+
+.form-control:focus, .form-select:focus {
+    background-color: var(--bs-body-bg);
+    border-color: #4ecca3;
+    color: var(--bs-body-color);
+}
+
+.form-control::placeholder {
+    color: rgba(255,255,255,0.5);
+}
+
+/* Таблицы */
+.table {
     color: var(--bs-body-color);
     border-color: rgba(255,255,255,0.1);
 }
 
-[data-theme="dark"] .table-striped>tbody>tr:nth-of-type(odd), 
-body.dark-theme .table-striped>tbody>tr:nth-of-type(odd) {
+.table-striped > tbody > tr:nth-of-type(odd) {
     background-color: rgba(255,255,255,0.05);
 }
 
-[data-theme="dark"] .table-hover>tbody>tr:hover,
-body.dark-theme .table-hover>tbody>tr:hover {
+.table-hover > tbody > tr:hover {
     background-color: rgba(255,255,255,0.1);
 }
 
-[data-theme="dark"] .modal-content, body.dark-theme .modal-content {
+/* Модальные окна */
+.modal-content {
     background-color: var(--bs-modal-content-bg);
     color: var(--bs-modal-content-color);
 }
 
-[data-theme="dark"] .form-control, 
-[data-theme="dark"] .form-select,
-body.dark-theme .form-control,
-body.dark-theme .form-select {
-    background-color: #0f3460;
-    border-color: rgba(255,255,255,0.2);
-    color: #eaeaea;
+.modal-header, .modal-footer {
+    border-color: rgba(255,255,255,0.1);
 }
 
-[data-theme="dark"] .form-control:focus,
-[data-theme="dark"] .form-select:focus,
-body.dark-theme .form-control:focus,
-body.dark-theme .form-select:focus {
-    background-color: #1a1a2e;
-    border-color: #4ecca3;
-    color: #eaeaea;
-}
-
-[data-theme="dark"] .list-group-item,
-body.dark-theme .list-group-item {
+/* Списки */
+.list-group-item {
     background-color: var(--bs-card-bg);
     border-color: var(--bs-card-border-color);
     color: var(--bs-body-color);
 }
 
-[data-theme="dark"] .navbar, body.dark-theme .navbar {
-    background-color: #0f3460 !important;
-}
-
-[data-theme="dark"] .alert, body.dark-theme .alert {
-    background-color: #0f3460;
-    color: #eaeaea;
+/* Alerts */
+.alert {
+    background-color: var(--bs-navbar-bg);
+    color: var(--bs-body-color);
     border-color: rgba(255,255,255,0.1);
 }
 
-[data-theme="dark"] .bg-light, body.dark-theme .bg-light {
-    background-color: #0f3460 !important;
+/* Кнопки */
+.btn-light {
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+.btn-dark {
+    background-color: #0f3460;
     color: #eaeaea;
 }
 
-[data-theme="dark"] address, body.dark-theme address {
-    background-color: #0f3460 !important;
+[data-theme="dark"] .btn-light {
+    background-color: #0f3460;
     color: #eaeaea;
 }
 
-[data-theme="dark"] .blockquote, body.dark-theme .blockquote {
-    color: #eaeaea;
+/* Блоки с текстом */
+address, .bg-light {
+    background-color: var(--bs-navbar-bg) !important;
+    color: var(--bs-body-color) !important;
 }
 
-[data-theme="dark"] .blockquote-footer, body.dark-theme .blockquote-footer {
+.blockquote {
+    color: var(--bs-body-color);
+}
+
+.blockquote-footer {
     color: rgba(255,255,255,0.7);
 }
 
-/* Плавный переход темы */
-body, .card, .form-control, .table, .modal-content, .list-group-item {
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+/* Карусель */
+.carousel-item img {
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.carousel-caption {
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 5px;
+}
+
+/* Footer */
+footer {
+    background-color: var(--bs-navbar-bg);
+    color: var(--bs-body-color);
+}
+
+/* Валидация форм */
+.is-invalid {
+    border-color: #dc3545 !important;
+}
+
+.is-valid {
+    border-color: #198754 !important;
+}
+
+.invalid-feedback {
+    color: #dc3545;
+}
+
+/* Чекбоксы и радио в тёмной теме */
+[data-theme="dark"] .form-check-input {
+    background-color: var(--bs-input-bg);
+    border-color: rgba(255,255,255,0.3);
+}
+
+[data-theme="dark"] .form-check-input:checked {
+    background-color: #4ecca3;
+    border-color: #4ecca3;
 }

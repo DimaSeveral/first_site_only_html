@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="main.js"></script> 
+    <script src="object.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Зоомагазин "Друзья животных" | Bootstrap</title>
+    <meta name="description" content="Зоомагазин товаров для домашних животных">
+    <meta name="keywords" content="зоомагазин, корм для животных, товары для питомцев">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>/* === Анимации для jQuery === */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    25% { transform: translateY(-10px); }
+    50% { transform: translateY(0); }
+    75% { transform: translateY(-5px); }
+}
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(25, 135, 84, 0.7); }
+    70% { box-shadow: 0 0 0 12px rgba(25, 135, 84, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(25, 135, 84, 0); }
+}
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.bounce { animation: bounce 0.6s ease; }
+.shake { animation: shake 0.3s ease; }
+.pulse { animation: pulse 1s; }
+.fade-in-up { animation: fadeInUp 0.3s ease forwards; }
+
+/* Плавный фон для ховера */
+.hover-highlight { transition: background-color 0.2s; }
+.hover-highlight:hover { background-color: #f8f9fa !important; }</style>
+</head>
+<body>
+
+<!-- ======== НАВИГАЦИОННОЕ МЕНЮ (компонент a) ======== -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-success sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <i class="bi bi-house-heart-fill me-2"></i>
+            Зоомагазин "Друзья животных"
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarMain">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="index.html">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">О нас</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#products">Товары</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#animals">Для кого</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="order.html">Оформить заказ</a>
+                </li>
+            </ul>
+            <form class="d-flex ms-3" role="search">
+                <div class="input-group">
+                    <input class="form-control" type="search" placeholder="Поиск товаров">
+                    <button class="btn btn-warning" type="submit">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<!-- ======== FLUID CONTAINER (адаптивная верстка) ======== -->
+<div class="container-fluid p-0">
+    <!-- Специальное предложение с использованием компонентов Bootstrap -->
+    <div class="alert alert-warning text-center rounded-0 m-0" role="alert">
+        <i class="bi bi-gift-fill me-2"></i>
+        <strong>Специальное предложение:</strong> скидка 20% на первый заказ!
+        <button onclick="onClickButton()" type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+    </div>
+</div>
+
+<!-- ======== ОСНОВНОЙ КОНТЕЙНЕР (центрирование) ======== -->
+<main class="container my-5">
+    
+    <!-- Секция "О магазине" -->
+    <section id="about" class="row mb-5">
+        <div class="col-12">
+            <h2 class="text-success border-bottom pb-2">О нашем магазине</h2>
+        </div>
+        <div class="col-md-8">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title text-success"><b>Добро пожаловать!</b></h5>
+                    <p class="card-text">Мы продаем товары для домашних животных уже много лет. У нас есть все необходимое для ваших питомцев.</p>
+                    <p class="card-text"><strong>Наши преимущества:</strong> низкие цены, большой выбор, хорошее качество.</p>
+                </div>
+            </div>
+            <figure class="text-center p-3 bg-light rounded">
+                <blockquote class="blockquote">
+                    <p>«Лучший друг человека заслуживает лучшего питания!»</p>
+                </blockquote>
+                <figcaption class="blockquote-footer">
+                    Наш девиз
+                </figcaption>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img id="main-animated-image"
+                     src="https://petbistro.ru/upload/medialibrary/89f/rkwkir1cf7k6jt9d6tp7xdtpg735mw6s.jpg" 
+                     class="card-img-top" alt="Собака">
+                <div class="card-body">
+                    <p class="card-text text-center">Наш магазин</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======== ТАБЛИЦА (компонент d) ======== -->
+    <section id="products" class="row mb-5">
+        <div class="col-12">
+            <h2 class="text-success border-bottom pb-2">Наши товары</h2>
+        </div>
+        <div class="col-md-6">
+            <!-- Таблица с классами Bootstrap .table и .table-striped -->
+            <table class="table table-striped table-hover table-bordered">
+                <thead class="table-success">
+                    <tr>
+                        <th>Категория</th>
+                        <th>Описание</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Корма</strong></td><td>Сухие и влажные корма для всех животных</td></tr>
+                    <tr><td><strong>Игрушки</strong></td><td>Мячики, пищалки, интерактивные игрушки</td></tr>
+                    <tr><td><strong>Аксессуары</strong></td><td>Ошейники, поводки, миски, лежанки</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0"><i class="bi bi-star-fill me-2"></i>Популярные товары:</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="bi bi-check-circle-fill text-success me-2"></i>Корм для кошек "Whiskas"</li>
+                    <li class="list-group-item"><i class="bi bi-check-circle-fill text-success me-2"></i>Ошейник для собак</li>
+                    <li class="list-group-item"><i class="bi bi-check-circle-fill text-success me-2"></i>Игрушка-мышка</li>
+                    <li class="list-group-item"><i class="bi bi-check-circle-fill text-success me-2"></i>Аквариум 50 литров</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======== СЕТКА С РАЗНЫМИ РАЗМЕРАМИ ЯЧЕЕК ======== -->
+    <h1 class="mb-4 text-success border-bottom pb-2" >Для каких животных</h1>
+
+<div class="row g-4">
+    <!-- Собаки -->
+    <div class="col-md-4">
+        <a href="/dogs" class="text-decoration-none">
+            <div class="card h-100 border-0 shadow-lg">
+                <div class="card-body">
+                    <h2 class="card-title h3 text-primary">Собаки</h2>
+                    <p class="card-text text-secondary">Корма, игрушки, аксессуары для собак всех пород</p>
+                </div>
+                <div class="card-footer bg-transparent border-0">
+                    
+                </div>
+            </div>
+        </a>
+    </div>
+    
+    <!-- Кошки -->
+    <div class="col-md-4">
+        <a href="/cats" class="text-decoration-none">
+            <div class="card h-100 border-0 shadow p-3 mb-5 bg-body rounded">
+                <div class="card-body">
+                    <h2 class="card-title h3 text-success" >Кошки</h2>
+                    <p class="card-text text-secondary">Все для кошек: от корма до когтеточек</p>
+                </div>
+                <div class="card-footer bg-transparent border-0">
+                    
+                </div>
+            </div>
+        </a>
+    </div>
+    
+    <!-- Грызуны -->
+    <div class="col-md-4">
+        <a href="/rodents" class="text-decoration-none">
+            <div class="card h-100 border-0 shadow p-3 mb-5 bg-body rounded">
+                <div class="card-body">
+                    <h2 class="card-title h3 text-warning">Грызуны</h2>
+                    <p class="card-text text-secondary">Клетки, корм, опилки для хомяков, кроликов, морских свинок</p>
+                </div>
+                <div class="card-footer bg-transparent border-0">
+                    
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+        
+
+
+    <!-- ======== КНОПКИ / ГРУППЫ КНОПОК (компонент c) ======== -->
+     <br><br>
+    <section class="row mb-5">
+        <div class="col-12">
+            <h2 class="text-success border-bottom pb-2">Наши услуги</h2>
+        </div>
+        
+        <!-- Группа кнопок -->
+        <div class="col-md-6 mb-3">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <i class="bi bi-grid-3x3-gap-fill me-2"></i>Группа кнопок
+                </div>
+                <div class="card-body">
+                    <div class="btn-group w-100" role="group">
+                        <button type="button" class="btn btn-outline-success">
+                            <i class="bi bi-truck"></i> Доставка
+                        </button>
+                        <button type="button" class="btn btn-outline-success">
+                            <i class="bi bi-credit-card"></i> Оплата
+                        </button>
+                        <button type="button" class="btn btn-outline-success">
+                            <i class="bi bi-arrow-return-left"></i> Возврат
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Кнопки разных размеров и стилей (компонент c) -->
+        <div class="col-md-6 mb-3">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <i class="bi bi-bootstrap-fill me-2"></i>Кнопки Bootstrap
+                </div>
+                <div class="card-body">
+                    <button type="button" class="btn btn-success btn-lg w-100 mb-2">
+                        <i class="bi bi-cart-check"></i> Купить сейчас
+                    </button>
+                    <button type="button" class="btn btn-warning w-100 mb-2">
+                        <i class="bi bi-bookmark-star"></i> В избранное
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm w-100">
+                        <i class="bi bi-info-circle"></i> Подробнее
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======== СГРУППИРОВАННЫЕ ФОРМЫ ВВОДА (компонент d) ======== -->
+    <section class="row mb-5">
+        <div class="col-12">
+            <h2 class="text-success border-bottom pb-2">Быстрый заказ</h2>
+        </div>
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <i class="bi bi-pencil-square me-2"></i>Оставьте заявку
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="form-label">Ваше имя</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-person"></i></span>
+                            <input type="text" class="form-control" placeholder="Введите имя">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Телефон</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                            <input type="tel" class="form-control" placeholder="+7 (___) ___-__-__">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                            <input type="email" class="form-control" placeholder="example@mail.com">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Выберите товар</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-box"></i></span>
+                            <select class="form-select">
+                                <option>Корм для собак</option>
+                                <option>Корм для кошек</option>
+                                <option>Игрушки</option>
+                                <option>Аксессуары</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Количество</label>
+                        <div class="input-group">
+                            <button class="btn btn-outline-success" type="button">-</button>
+                            <input type="number" class="form-control text-center" value="1" min="1">
+                            <button class="btn btn-outline-success" type="button">+</button>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Промокод</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-tag"></i></span>
+                            <input type="text" class="form-control" placeholder="Введите промокод">
+                            <button class="btn btn-success" type="button">Применить</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group w-100">
+                        <button class="btn btn-success">
+                            <i class="bi bi-check-circle"></i> Заказать
+                        </button>
+                        <button class="btn btn-outline-success">
+                            <i class="bi bi-cart"></i> В корзину
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  
+</main>
+
+
+
+<!-- Кнопка "наверх" (Bootstrap + иконки) -->
+<a href="#" class="btn btn-success position-fixed bottom-0 end-0 m-4 rounded-circle p-3" 
+   style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; z-index: 1000;" 
+   id="backToTop" title="Наверх">
+    <i class="bi bi-arrow-up fs-4"></i>
+</a>
+
+<!-- Переключатель темы - ИСПРАВЛЕННЫЙ -->
+<div class="position-fixed bottom-0 start-0 m-4" style="z-index: 1000;">
+    <div class="btn-group-vertical shadow">
+        <button class="btn btn-light border" onclick="setTheme('light')" id="lightThemeBtn">
+            <i class="bi bi-sun-fill"></i> Светлая
+        </button>
+        <button class="btn btn-dark border" onclick="setTheme('dark')"id="darkThemeBtn">
+            <i class="bi bi-moon-stars-fill"></i> Темная
+        </button>
+    </div>
+</div>
+
+<!-- Bootstrap JS (необходим для работы компонентов) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    function setTheme(theme) {
+        console.log('Смена темы на:', theme);
+        
+        // Просто меняем тему, не трогая кнопки
+        if (theme === 'dark') {
+            document.body.classList.add('dark-theme');
+            document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+            document.body.classList.remove('dark-theme');
+            document.documentElement.removeAttribute('data-theme');
+        }
+        
+        localStorage.setItem('site_theme', theme);
+    }
+    
+    window.onload = function() {
+        const saved = localStorage.getItem('site_theme');
+        if (saved === 'dark') {
+            document.body.classList.add('dark-theme');
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    };
+</script>
+<!-- =============================== -->
+<!-- НОВЫЕ ФУНКЦИИ ДЛЯ ДИНАМИЧЕСКОГО ИЗМЕНЕНИЯ DOM -->
+<!-- =============================== -->
+
+<!-- 1. ДОБАВЛЕНИЕ И УДАЛЕНИЕ ЭЛЕМЕНТОВ СПИСКА -->
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-success text-white">
+            <i class="bi bi-list-check me-2"></i>Управление списком товаров
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <input type="text" id="newItemInput" class="form-control" placeholder="Название нового товара">
+                        <button class="btn btn-success" id="addItemBtn">Добавить товар</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <button class="btn btn-warning w-100" id="clearListBtn">Очистить список</button>
+                </div>
+            </div>
+            
+            <ul id="shoppingList" class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Корм для кошек "Whiskas"
+                    <button class="btn btn-sm btn-danger remove-item"><i class="bi bi-trash"></i></button>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Ошейник для собак
+                    <button class="btn btn-sm btn-danger remove-item"><i class="bi bi-trash"></i></button>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Игрушка-мышка
+                    <button class="btn btn-sm btn-danger remove-item"><i class="bi bi-trash"></i></button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- 2. РАСКРЫТИЕ КАРТИНКИ ИЗ ПРЕВЬЮ НА ПОЛНЫЙ ЭКРАН -->
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-success text-white">
+            <i class="bi bi-image me-2"></i>Галерея товаров
+        </div>
+        <div class="card-body">
+            <div class="row g-4">
+                <!-- Превью картинок -->
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <img src="https://ir.ozone.ru/s3/multimedia-1-s/c1000/7646540176.jpg" 
+                             class="card-img-top img-preview" 
+                             alt="Собака" 
+                             data-full="https://ir.ozone.ru/s3/multimedia-1-s/c1000/7646540176.jpg">
+                        <div class="card-body">
+                            <h5 class="card-title">Корм для собак</h5>
+                            <p class="card-text">Для укрпеления костей, выносливости и хоршего настроения вашего питомца!</p>
+                            <button class="btn btn-success" id="addItemBtn">Цена: 1490Р.</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <img src="https://avatars.mds.yandex.net/get-mpic/12140066/2a0000019016a1b2472010cf80c164ca0b9e/orig" 
+                             class="card-img-top img-preview" 
+                             alt="Кошка" 
+                             data-full="https://avatars.mds.yandex.net/get-mpic/12140066/2a0000019016a1b2472010cf80c164ca0b9e/orig">
+                        <div class="card-body">
+                            <h5 class="card-title">Корм для котов и кошек</h5>
+                            <p class="card-text">Для гладкости шерсти, приятного запаха и поддержания витаминов!</p>
+                            <button class="btn btn-success" id="addItemBtn">Цена: 990Р.</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <img src="https://avatars.mds.yandex.net/get-mpic/16869486/2a0000019b9dd4534a576bee365e4664d3e2/orig" 
+                             class="card-img-top img-preview" 
+                             alt="Собака" 
+                             data-full="https://avatars.mds.yandex.net/get-mpic/16869486/2a0000019b9dd4534a576bee365e4664d3e2/orig">
+                        <div class="card-body">
+                            <h5 class="card-title">Корм для грызунов</h5>
+                            <p class="card-text">Для поддержки здоровья вашего маленького друга!</p>
+                            <button class="btn btn-success" id="addItemBtn">Цена: 890Р.</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 3. ОДНООКОННОЕ ПРИЛОЖЕНИЕ -->
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-success text-white">
+            <i class="bi bi-window me-2"></i>Однооконное приложение
+        </div>
+        <div class="card-body">
+            <div class="btn-group mb-3 w-100" role="group">
+                <button class="btn btn-outline-success active" data-view="home">Главная</button>
+                <button class="btn btn-outline-success" data-view="products">Товары</button>
+                <button class="btn btn-outline-success" data-view="about">О нас</>
+            </div>
+            
+            <!-- Содержимое однооконного приложения -->
+            <div id="appContent" class="p-3">
+                <h3 class="text-success">Добро пожаловать в Зоомагазин "Друзья животных"!</h3>
+                <p>Это пример однооконного приложения. Вы можете переключаться между вкладками, и содержимое будет динамически обновляться.</p>
+                <="alert alert-info mt-3">
+                    <i class="bi bi-info-circle-fill me-2"></i>
+                    Нажмите на вкладки выше для переключения
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно для увеличения изображения -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Полный экран изображения</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img id="modalImage" class="img-fluid" src="" alt="Увеличенное изображение">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="main.js">
+</script>
+<!-- Контакты -->
+    <section class="row">
+        <div class="col-12">
+            <h2 class="text-success border-bottom pb-2">Наши контакты</h2>
+        </div>
+        <div class="col-md-6">
+            <address class="p-3 bg-light rounded">
+                <p><i class="bi bi-geo-alt-fill text-success me-2"></i>г. Красноярск, ул. Батоническая, 15</p>
+                <p><i class="bi bi-telephone-fill text-success me-2"></i>Телефон: <a href="tel:+79222017562" class="text-decoration-none">8 (922) 201-75-62</a></p>
+                <p><i class="bi bi-envelope-fill text-success me-2"></i>Email: <a href="mailto:info@zoo.ru" class="text-decoration-none">info@zoo.ru</a></p>
+                <p><i class="bi bi-clock-fill text-success me-2"></i>График: пн-пт 9:00–21:00, сб-вс 10:00–20:00</p>
+            </address>
+        </div>
+        
+    </section>
+<!-- Футер -->
+<footer class="bg-success text-white py-4 mt-5">
+    <div class="container text-center">
+        <h6 class="mb-0">© 2026 Зоомагазин "Друзья животных". Все права защищены.</h6>
+    </div>
+</footer>
+<!-- ========== BANER СОГЛАСИЯ НА COOKIE ========== -->
+<div id="cookie-consent-banner" role="alert" aria-live="polite">
+    <div class="banner-content container">
+        <div class="banner-text">
+            <strong>🍪 Мы используем cookie</strong><br>
+            Этот сайт использует файлы cookie для сохранения темы и улучшения работы. 
+            Продолжая использовать сайт, вы соглашаетесь с нашей 
+            <a href="#" data-bs-toggle="modal" data-bs-target="#cookiePolicyModal">политикой конфиденциальности</a>.
+        </div>
+        <div class="banner-buttons">
+            
+            <button id="cookie-reject-btn" class="btn btn-sm btn-reject " data-bs-dismiss="alert">Отклонить</button>
+            
+            <button id="cookie-accept-btn" class="btn btn-sm btn-accept " data-bs-dismiss="alert">Принять</button>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно с политикой -->
+<div class="modal fade" id="cookiePolicyModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Политика использования cookie</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Наш сайт использует файлы cookie для следующих целей:</p>
+                <ul>
+                    <li><strong>Тема оформления</strong> — запоминание выбора светлой/тёмной темы</li>
+                    <li><strong>Функциональность</strong> — сохранение данных формы для удобства</li>
+                </ul>
+                <p>Мы не передаём ваши данные третьим лицам. Вы можете отозвать согласие в любой момент через настройки браузера.</p>
+                <p><small>Срок хранения служебных cookie: до 365 дней.</small></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="cookie.js"></script>
+    <script src="object.js"></script>
+
+</body>
+</html>
+
+
