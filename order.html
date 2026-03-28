@@ -258,10 +258,48 @@
             </button>
         </div>
     </div>
+<!-- ========== BANER СОГЛАСИЯ НА COOKIE ========== -->
+<div id="cookie-consent-banner" role="alert" aria-live="polite">
+    <div class="banner-content container">
+        <div class="banner-text">
+            <strong>🍪 Мы используем cookie</strong><br>
+            Этот сайт использует файлы cookie для сохранения темы и улучшения работы. 
+            Продолжая использовать сайт, вы соглашаетесь с нашей 
+            <a href="#" data-bs-toggle="modal" data-bs-target="#cookiePolicyModal">политикой конфиденциальности</a>.
+        </div>
+        <div class="banner-buttons">
+            <button id="cookie-reject-btn" class="btn btn-sm btn-reject">Отклонить</button>
+            <button id="cookie-accept-btn" class="btn btn-sm btn-accept">Принять</button>
+        </div>
+    </div>
+</div>
 
+<!-- Модальное окно с политикой -->
+<div class="modal fade" id="cookiePolicyModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Политика использования cookie</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Наш сайт использует файлы cookie для следующих целей:</p>
+                <ul>
+                    <li><strong>Тема оформления</strong> — запоминание выбора светлой/тёмной темы</li>
+                    <li><strong>Функциональность</strong> — сохранение данных формы для удобства</li>
+                </ul>
+                <p>Мы не передаём ваши данные третьим лицам. Вы можете отозвать согласие в любой момент через настройки браузера.</p>
+                <p><small>Срок хранения служебных cookie: до 365 дней.</small></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
     <!-- Bootstrap JS -->
-    <scrip src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="cookie.js"></script>
     <script src="object.js"></script>
 </body>
 </body>
